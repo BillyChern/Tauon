@@ -1,0 +1,41 @@
+# Baseline comparisons
+sweep_name: baselines
+benchmark: cifar10
+
+experiments:
+  # AdamW baseline
+  - name: adamw_baseline
+    optimizer: adamw
+    config:
+      lr: 0.001
+      weight_decay: 0.01
+      epochs: 10
+      batch_size: 512
+    lr_sweep: [0.0005, 0.001, 0.002]
+    seeds: [42, 123, 456]
+
+  # SGD + Momentum baseline
+  - name: sgd_baseline
+    optimizer: sgd
+    config:
+      lr: 0.1
+      momentum: 0.9
+      weight_decay: 0.0001
+      epochs: 10
+      batch_size: 512
+    lr_sweep: [0.05, 0.1, 0.2]
+    seeds: [42, 123, 456]
+
+  # Best SoftMuon config
+  - name: softmuon_best
+    optimizer: softmuon
+    config:
+      lr: 0.02
+      momentum: 0.95
+      lambda_reg: 0.1
+      ns_iters: 5
+      epochs: 10
+      batch_size: 512
+    seeds: [42, 123, 456, 789, 1011]
+
+output_dir: experiments/results/baselines

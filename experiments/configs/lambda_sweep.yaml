@@ -1,0 +1,26 @@
+# Lambda sweep experiment configuration
+sweep_name: lambda_coarse
+benchmark: cifar10
+target_metric: accuracy
+target_value: 94.0
+
+base_config:
+  lr: 0.02
+  momentum: 0.95
+  ns_iters: 5
+  epochs: 10
+  batch_size: 512
+  warmup_epochs: 0.5
+  lr_schedule: cosine
+  mixed_precision: true
+
+sweep:
+  lambda_reg:
+    type: log_uniform
+    values: [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0]
+
+seeds: [42, 123, 456]
+early_stop_patience: 3
+max_parallel: 1
+
+output_dir: experiments/results/lambda_sweep
