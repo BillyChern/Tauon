@@ -1,0 +1,46 @@
+# Ablation studies configuration
+sweep_name: ablations
+benchmark: cifar10
+
+experiments:
+  # Lambda mode comparison
+  - name: lambda_mode_comparison
+    base_config:
+      lr: 0.02
+      momentum: 0.95
+      lambda_reg: 0.1
+      ns_iters: 5
+      epochs: 10
+      batch_size: 512
+    sweep:
+      lambda_mode:
+        values: [fixed, adaptive, scheduled]
+    seeds: [42, 123, 456]
+
+  # Newton-Schulz iterations
+  - name: ns_iters_ablation
+    base_config:
+      lr: 0.02
+      momentum: 0.95
+      lambda_reg: 0.1
+      epochs: 10
+      batch_size: 512
+    sweep:
+      ns_iters:
+        values: [3, 5, 7, 10]
+    seeds: [42, 123]
+
+  # Momentum comparison
+  - name: momentum_comparison
+    base_config:
+      lr: 0.02
+      lambda_reg: 0.1
+      ns_iters: 5
+      epochs: 10
+      batch_size: 512
+    sweep:
+      momentum:
+        values: [0.9, 0.95, 0.99]
+    seeds: [42, 123, 456]
+
+output_dir: experiments/results/ablations
