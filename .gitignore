@@ -60,3 +60,9 @@ htmlcov/
 # mypy
 .mypy_cache/
 .claude/
+
+# Local-only Claude Code instructions
+CLAUDE.md
+
+# CIFAR-10 dataset binaries (download separately)
+cifar10-airbench/cifar10/
